@@ -172,7 +172,7 @@ name="SnailClimb"
 # 第一种方式
 echo ${#name} #输出 10
 # 第二种方式
-expr length "$name";
+expr length "$name"
 ```
 
 输出结果:
@@ -185,15 +185,15 @@ expr length "$name";
 使用 expr 命令时，表达式中的运算符左右必须包含空格，如果不包含空格，将会输出表达式本身:
 
 ```shell
-expr 5+6    // 直接输出 5+6
-expr 5 + 6       // 输出 11
+expr 5+6    # 直接输出 5+6
+expr 5 + 6  # 输出 11
 ```
 
 对于某些运算符，还需要我们使用符号`\`进行转义，否则就会提示语法错误。
 
 ```shell
-expr 5 * 6       // 输出错误
-expr 5 \* 6      // 输出30
+expr 5 * 6  # 输出错误
+expr 5 \* 6 # 输出30
 ```
 
 **截取子字符串:**
@@ -231,19 +231,29 @@ bash 支持一维数组（不支持多维数组），并且没有限定数组的
 
 ```shell
 #!/bin/bash
-array=(1 2 3 4 5);
+array=(1 2 3 4 5)
 # 获取数组长度
 length=${#array[@]}
 # 或者
 length2=${#array[*]}
 #输出数组长度
-echo $length #输出：5
-echo $length2 #输出：5
+echo "length of array is: " $length  #输出：5
+echo "length of array is: " $length2 #输出：5
 # 输出数组第三个元素
-echo ${array[2]} #输出：3
-unset array[1]# 删除下标为1的元素也就是删除第二个元素
+echo "The 3rd element of array is: " ${array[2]} #输出：3
+
+# 删除下标为1的元素也就是删除第二个元素
+unset array[1]
+#输出数组长度
+length3=${#array[@]}
+echo "length of array is: " $length3  #输出：0
 for i in ${array[@]};do echo $i ;done # 遍历数组，输出：1 3 4 5
-unset array; # 删除数组中的所有元素
+
+# 删除数组中的所有元素
+unset array 
+#输出数组长度
+length4=${#array[@]}
+echo "length of array is: " $length4 #输出：0
 for i in ${array[@]};do echo $i ;done # 遍历数组，数组元素为空，没有任何输出内容
 ```
 
@@ -283,20 +293,20 @@ echo "Total value : $val"
 
 ```shell
 #!/bin/bash
-score=90;
-maxscore=100;
-if [ $score -eq $maxscore ]
-then
-   echo "A"
-else
-   echo "B"
-fi
+score=90
+maxscore=100
+if [ $score -eq $maxscore ] # 如果 # 注意这里的[]和中间的判断式是有空格的
+then # 那么
+   echo "Yes"
+else # 否则
+   echo "No"
+fi # 结束
 ```
 
 输出结果：
 
 ```
-B
+No
 ```
 
 ### 逻辑运算符
